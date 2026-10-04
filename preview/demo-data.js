@@ -256,6 +256,66 @@ const DEVICES = [
   { entry: { entity_id: "vacuum.robot_vacuum", area_id: "phong_khach" }, state: { entity_id: "vacuum.robot_vacuum", state: "cleaning", attributes: { friendly_name: "Robot hút bụi", battery_level: 96, battery_last_charged_by: "Bát nạp", status: "Cleaning", features: 1015 } } },
   // Robot hút bụi số 2 (phòng master) – bật chạy sẵn
   { entry: { entity_id: "vacuum.robot_vacuum_2", area_id: "phong_ngu_master" }, state: { entity_id: "vacuum.robot_vacuum_2", state: "cleaning", attributes: { friendly_name: "Robot hút bụi master", battery_level: 82, battery_last_charged_by: "Bát nạp", status: "Cleaning", features: 1015 } } },
+
+  // === B2: thêm thiết bị còn thiếu (đèn, climate, cover, fan, lock, media, sensor, an toàn) ===
+  // Đèn bổ sung
+  light("master_guong", "Đèn gương phòng master", "phong_ngu_master", true, { brightness: 130, color_temp_kelvin: 3000 }),
+  light("wc_chinh_guong", "Đèn gương WC chính", "wc_chinh", true, { brightness: 150, color_temp_kelvin: 3500 }),
+  light("phong_lam_viec_ban", "Đèn bàn làm việc", "phong_lam_viec", true, { brightness: 160, color_temp_kelvin: 4000 }),
+  light("ban_cong_dai", "Đèn dây ban công", "ban_cong", true, { brightness: 120, color_temp_kelvin: 2700 }),
+  light("lo_gia_dai", "Đèn dây lô gia", "lo_gia", true, { brightness: 110, color_temp_kelvin: 2700 }),
+  light("nha_bep_hat", "Đèn hắt dưới tủ bếp", "nha_bep", true, { brightness: 200, color_temp_kelvin: 4000 }),
+  light("phong_ngu_2_ngu", "Đèn ngủ phòng 2", "phong_ngu_2", false),
+  light("phong_ngu_3_ngu", "Đèn ngủ phòng 3", "phong_ngu_3", true, { brightness: 60 }),
+  light("hanh_lang_cam_ung", "Đèn cảm ứng hành lang", "hanh_lang", false),
+  // Climate bổ sung
+  { entry: { entity_id: "climate.phong_ngu_3", area_id: "phong_ngu_3" }, state: { entity_id: "climate.phong_ngu_3", state: "off", attributes: { friendly_name: "Điều hòa phòng ngủ 3", current_temperature: 26.1, temperature: 26, hvac_modes: ["off", "heat", "cool", "auto"], hvac_action: "off", min_temp: 16, max_temp: 32 } } },
+  { entry: { entity_id: "climate.nuoc_nong", area_id: "lo_gia" }, state: { entity_id: "climate.nuoc_nong", state: "heat", attributes: { friendly_name: "Máy nước nóng (boiler)", current_temperature: 48, temperature: 55, hvac_modes: ["off", "heat", "heat_cool"], hvac_action: "heating", min_temp: 30, max_temp: 75 } } },
+  // Rèm / mành (cover)
+  { entry: { entity_id: "cover.rem_master", area_id: "phong_ngu_master" }, state: { entity_id: "cover.rem_master", state: "open", attributes: { friendly_name: "Rèm phòng master", current_position: 70, supported_features: 15 } } },
+  { entry: { entity_id: "cover.rem_phong_ngu_2", area_id: "phong_ngu_2" }, state: { entity_id: "cover.rem_phong_ngu_2", state: "closed", attributes: { friendly_name: "Rèm phòng ngủ 2", current_position: 0, supported_features: 15 } } },
+  { entry: { entity_id: "cover.rem_ban_cong", area_id: "ban_cong" }, state: { entity_id: "cover.rem_ban_cong", state: "open", attributes: { friendly_name: "Mành ban công", current_position: 100, supported_features: 15 } } },
+  { entry: { entity_id: "cover.manh_wc_chinh", area_id: "wc_chinh" }, state: { entity_id: "cover.manh_wc_chinh", state: "closed", attributes: { friendly_name: "Mành WC chính", current_position: 10, supported_features: 15 } } },
+  { entry: { entity_id: "cover.rem_lo_gia", area_id: "lo_gia" }, state: { entity_id: "cover.rem_lo_gia", state: "open", attributes: { friendly_name: "Rèm lô gia", current_position: 80, supported_features: 15 } } },
+  // Quạt (fan)
+  { entry: { entity_id: "fan.quat_tran_phong_khach", area_id: "phong_khach" }, state: { entity_id: "fan.quat_tran_phong_khach", state: "on", attributes: { friendly_name: "Quạt trần phòng khách", percent: 40, preset_mode: "auto", preset_modes: ["off", "auto", "on"], supported_features: 22 } } },
+  { entry: { entity_id: "fan.quat_tran_master", area_id: "phong_ngu_master" }, state: { entity_id: "fan.quat_tran_master", state: "off", attributes: { friendly_name: "Quạt trần phòng master", percent: 0, preset_mode: "off", preset_modes: ["off", "auto", "on"], supported_features: 22 } } },
+  // Khóa cửa (lock)
+  { entry: { entity_id: "lock.cua_ra_vao", area_id: "hanh_lang" }, state: { entity_id: "lock.cua_ra_vao", state: "locked", attributes: { friendly_name: "Khóa cửa thông minh", code_format: "4-8" } } },
+  // Thiết bị gia dụng (switch)
+  { entry: { entity_id: "switch.may_loc_khong_khi", area_id: "phong_khach" }, state: { entity_id: "switch.may_loc_khong_khi", state: "on", attributes: { friendly_name: "Máy lọc không khí" } } },
+  { entry: { entity_id: "switch.quat_hut_bep", area_id: "nha_bep" }, state: { entity_id: "switch.quat_hut_bep", state: "on", attributes: { friendly_name: "Quạt hút mùi bếp" } } },
+  { entry: { entity_id: "switch.quat_hut_wc", area_id: "wc_chinh" }, state: { entity_id: "switch.quat_hut_wc", state: "off", attributes: { friendly_name: "Quạt thông gió WC" } } },
+  { entry: { entity_id: "switch.nang_chien", area_id: "nha_bep" }, state: { entity_id: "switch.nang_chien", state: "off", attributes: { friendly_name: "Nồi chiên không dầu" } } },
+  { entry: { entity_id: "switch.bom_nuoc", area_id: "lo_gia" }, state: { entity_id: "switch.bom_nuoc", state: "on", attributes: { friendly_name: "Bơm nước" } } },
+  { entry: { entity_id: "switch.may_say", area_id: "lo_gia" }, state: { entity_id: "switch.may_say", state: "off", attributes: { friendly_name: "Máy sấy quần áo" } } },
+  // Âm thanh (media_player)
+  { entry: { entity_id: "media_player.soundbar_phong_khach", area_id: "phong_khach" }, state: { entity_id: "media_player.soundbar_phong_khach", state: "playing", attributes: { friendly_name: "Soundbar phòng khách", media_content_type: "music", volume_level: 0.3, is_volume_muted: false } } },
+  { entry: { entity_id: "media_player.loa_phong_ngu_2", area_id: "phong_ngu_2" }, state: { entity_id: "media_player.loa_phong_ngu_2", state: "off", attributes: { friendly_name: "Loa phòng ngủ 2" } } },
+  { entry: { entity_id: "media_player.loa_ban_cong", area_id: "ban_cong" }, state: { entity_id: "media_player.loa_ban_cong", state: "off", attributes: { friendly_name: "Loa ban công" } } },
+  // Camera
+  { entry: { entity_id: "camera.ban_cong", area_id: "ban_cong" }, state: { entity_id: "camera.ban_cong", state: "idle", attributes: { friendly_name: "Camera ban công" } } },
+  { entry: { entity_id: "camera.nha_bep", area_id: "nha_bep" }, state: { entity_id: "camera.nha_bep", state: "idle", attributes: { friendly_name: "Camera bếp" } } },
+  // Chất lượng không khí + nhiệt/ẩm
+  { entry: { entity_id: "sensor.phong_khach_co2", area_id: "phong_khach" }, state: { entity_id: "sensor.phong_khach_co2", state: "520", attributes: { friendly_name: "CO2 phòng khách", device_class: "carbon_dioxide", unit_of_measurement: "ppm" } } },
+  { entry: { entity_id: "sensor.phong_ngu_master_co2", area_id: "phong_ngu_master" }, state: { entity_id: "sensor.phong_ngu_master_co2", state: "610", attributes: { friendly_name: "CO2 phòng master", device_class: "carbon_dioxide", unit_of_measurement: "ppm" } } },
+  { entry: { entity_id: "sensor.phong_ngu_2_thietao", area_id: "phong_ngu_2" }, state: { entity_id: "sensor.phong_ngu_2_thietao", state: "25.3", attributes: { friendly_name: "Nhiệt độ phòng ngủ 2", device_class: "temperature", unit_of_measurement: "°C" } } },
+  { entry: { entity_id: "sensor.phong_ngu_3_thietao", area_id: "phong_ngu_3" }, state: { entity_id: "sensor.phong_ngu_3_thietao", state: "25.9", attributes: { friendly_name: "Nhiệt độ phòng ngủ 3", device_class: "temperature", unit_of_measurement: "°C" } } },
+  { entry: { entity_id: "sensor.phong_ngu_master_doam", area_id: "phong_ngu_master" }, state: { entity_id: "sensor.phong_ngu_master_doam", state: "55", attributes: { friendly_name: "Độ ẩm phòng master", device_class: "humidity", unit_of_measurement: "%" } } },
+  { entry: { entity_id: "sensor.phong_lam_viec_doam", area_id: "phong_lam_viec" }, state: { entity_id: "sensor.phong_lam_viec_doam", state: "47", attributes: { friendly_name: "Độ ẩm phòng làm việc", device_class: "humidity", unit_of_measurement: "%" } } },
+  { entry: { entity_id: "sensor.ban_cong_ap_suat", area_id: "ban_cong" }, state: { entity_id: "sensor.ban_cong_ap_suat", state: "1012", attributes: { friendly_name: "Áp suất khí quyển", device_class: "atmospheric_pressure", unit_of_measurement: "hPa" } } },
+  // Công suất (power) cho mạch năng lượng
+  { entry: { entity_id: "sensor.may_loc_khong_khi_dien", area_id: "phong_khach" }, state: { entity_id: "sensor.may_loc_khong_khi_dien", state: "0.3", attributes: { friendly_name: "Công suất máy lọc không khí", device_class: "power", unit_of_measurement: "kW" } } },
+  { entry: { entity_id: "sensor.dieu_hoa_phong_khach_dien", area_id: "phong_khach" }, state: { entity_id: "sensor.dieu_hoa_phong_khach_dien", state: "1.1", attributes: { friendly_name: "Công suất điều hòa phòng khách", device_class: "power", unit_of_measurement: "kW" } } },
+  { entry: { entity_id: "sensor.tivi_dien", area_id: "phong_khach" }, state: { entity_id: "sensor.tivi_dien", state: "0.15", attributes: { friendly_name: "Công suất tivi", device_class: "power", unit_of_measurement: "kW" } } },
+  { entry: { entity_id: "sensor.tu_lanh_dien", area_id: "nha_bep" }, state: { entity_id: "sensor.tu_lanh_dien", state: "0.2", attributes: { friendly_name: "Công suất tủ lạnh", device_class: "power", unit_of_measurement: "kW" } } },
+  { entry: { entity_id: "sensor.may_giat_dien", area_id: "lo_gia" }, state: { entity_id: "sensor.may_giat_dien", state: "0.5", attributes: { friendly_name: "Công suất máy giặt", device_class: "power", unit_of_measurement: "kW" } } },
+  // An toàn (binary_sensor)
+  { entry: { entity_id: "binary_sensor.khoi_phong_khach", area_id: "phong_khach" }, state: { entity_id: "binary_sensor.khoi_phong_khach", state: "off", attributes: { friendly_name: "Cảm biến khói phòng khách", device_class: "smoke" } } },
+  { entry: { entity_id: "binary_sensor.khoi_master", area_id: "phong_ngu_master" }, state: { entity_id: "binary_sensor.khoi_master", state: "off", attributes: { friendly_name: "Cảm biến khói phòng master", device_class: "smoke" } } },
+  { entry: { entity_id: "binary_sensor.ro_nuoc_bep", area_id: "nha_bep" }, state: { entity_id: "binary_sensor.ro_nuoc_bep", state: "off", attributes: { friendly_name: "Cảm biến rò nước bếp", device_class: "moisture" } } },
+  { entry: { entity_id: "binary_sensor.gas_bep", area_id: "nha_bep" }, state: { entity_id: "binary_sensor.gas_bep", state: "off", attributes: { friendly_name: "Cảm biến gas bếp", device_class: "gas" } } },
+
   // Thời tiết + mặt trời
   { entry: { entity_id: "weather.vietnam", area_id: null }, state: { entity_id: "weather.vietnam", state: "rainy", attributes: { friendly_name: "Thời tiết", cloud_coverage: 60, wind_speed: 12, wind_speed_unit: "km/h" } } },
   { entry: { entity_id: "sun.sun", area_id: null }, state: { entity_id: "sun.sun", state: "above_horizon", attributes: { friendly_name: "Mặt trời", elevation: 45, azimuth: 180 } } },
@@ -309,6 +369,53 @@ DEMO_BUILDING.floors[0].placements = [
   { entity_id: "sensor.phong_khach_nhietao", x: 0, z: 0 },
   { entity_id: "sensor.phong_khach_doam", x: 0, z: 0 },
   { entity_id: "sensor.nha_bep_dien", x: 0, z: 0 },
+  // B2: vị trí 3D cho thiết bị bổ sung
+  { entity_id: "light.master_guong", x: 0.4, z: 1.0, y: null, mount: "wall" },
+  { entity_id: "light.wc_chinh_guong", x: 3.2, z: 9.15, y: null, mount: "wall" },
+  { entity_id: "light.phong_lam_viec_ban", x: 12.55, z: 8.7, y: null, mount: "wall" },
+  { entity_id: "light.ban_cong_dai", x: 0.8, z: -0.9, y: null, mount: "ceiling" },
+  { entity_id: "light.lo_gia_dai", x: 11.2, z: 5.0, y: null, mount: "ceiling" },
+  { entity_id: "light.nha_bep_hat", x: 1.25, z: 9.2, y: null, mount: "wall" },
+  { entity_id: "light.phong_ngu_2_ngu", x: 9.55, z: 0.5, y: null, mount: "floor" },
+  { entity_id: "light.phong_ngu_3_ngu", x: 6.3, z: 0.5, y: null, mount: "floor" },
+  { entity_id: "light.hanh_lang_cam_ung", x: 4.6, z: 9.5, y: null, mount: "ceiling" },
+  { entity_id: "climate.phong_ngu_3", x: 6.3, z: 4.2, y: null, mount: "wall" },
+  { entity_id: "climate.nuoc_nong", x: 12.6, z: 6.7, y: null, mount: "wall" },
+  { entity_id: "cover.rem_master", x: 0.25, z: 2.2, y: null, mount: "wall" },
+  { entity_id: "cover.rem_phong_ngu_2", x: 12.85, z: 4.2, y: null, mount: "wall" },
+  { entity_id: "cover.rem_ban_cong", x: 2.2, z: -0.1, y: null, mount: "wall" },
+  { entity_id: "cover.manh_wc_chinh", x: 3.0, z: 11.35, y: null, mount: "wall" },
+  { entity_id: "cover.rem_lo_gia", x: 12.85, z: 5.7, y: null, mount: "wall" },
+  { entity_id: "fan.quat_tran_phong_khach", x: 2.25, z: 6.75, y: null, mount: "ceiling" },
+  { entity_id: "fan.quat_tran_master", x: 3.1, z: 2.4, y: null, mount: "ceiling" },
+  { entity_id: "lock.cua_ra_vao", x: 5.5, z: 11.4, y: null, mount: "wall" },
+  { entity_id: "switch.may_loc_khong_khi", x: 0.4, z: 5.4 },
+  { entity_id: "switch.quat_hut_bep", x: 1.25, z: 9.15, y: null, mount: "ceiling" },
+  { entity_id: "switch.quat_hut_wc", x: 3.25, z: 9.15, y: null, mount: "ceiling" },
+  { entity_id: "switch.nang_chien", x: 0.4, z: 10.4 },
+  { entity_id: "switch.bom_nuoc", x: 12.6, z: 6.5 },
+  { entity_id: "switch.may_say", x: 12.2, z: 4.9 },
+  { entity_id: "media_player.soundbar_phong_khach", x: 4.3, z: 6.9, y: null, mount: "wall" },
+  { entity_id: "media_player.loa_phong_ngu_2", x: 12.8, z: 4.3, y: null, mount: "wall" },
+  { entity_id: "media_player.loa_ban_cong", x: 2.2, z: -1.3 },
+  { entity_id: "camera.ban_cong", x: 4.2, z: -1.2, y: null, mount: "ceiling", rotation: 135 },
+  { entity_id: "camera.nha_bep", x: 2.3, z: 9.2, y: null, mount: "ceiling", rotation: 225 },
+  { entity_id: "sensor.phong_khach_co2", x: 2.25, z: 5.0, y: null, mount: "ceiling" },
+  { entity_id: "sensor.phong_ngu_master_co2", x: 3.8, z: 0.4, y: null, mount: "wall" },
+  { entity_id: "sensor.phong_ngu_2_thietao", x: 8.7, z: 0.4, y: null, mount: "wall" },
+  { entity_id: "sensor.phong_ngu_3_thietao", x: 8.3, z: 0.4, y: null, mount: "wall" },
+  { entity_id: "sensor.phong_ngu_master_doam", x: 4.3, z: 0.4, y: null, mount: "wall" },
+  { entity_id: "sensor.phong_lam_viec_doam", x: 10.6, z: 8.0, y: null, mount: "wall" },
+  { entity_id: "sensor.ban_cong_ap_suat", x: 0.4, z: -1.2, y: null, mount: "wall" },
+  { entity_id: "sensor.may_loc_khong_khi_dien", x: 0.4, z: 5.4 },
+  { entity_id: "sensor.dieu_hoa_phong_khach_dien", x: 2.2, z: 4.7, y: null, mount: "wall" },
+  { entity_id: "sensor.tivi_dien", x: 4.3, z: 6.5, y: null, mount: "wall" },
+  { entity_id: "sensor.tu_lanh_dien", x: 2.15, z: 9.45 },
+  { entity_id: "sensor.may_giat_dien", x: 10.85, z: 4.9 },
+  { entity_id: "binary_sensor.khoi_phong_khach", x: 1.5, z: 5.0, y: null, mount: "ceiling" },
+  { entity_id: "binary_sensor.khoi_master", x: 2.2, z: 3.6, y: null, mount: "ceiling" },
+  { entity_id: "binary_sensor.ro_nuoc_bep", x: 1.2, z: 11.3 },
+  { entity_id: "binary_sensor.gas_bep", x: 2.2, z: 9.2, y: null, mount: "wall" },
 ];
 
 // Đồ nội thất đầy đủ cho căn hộ (type = loại nội thất built-in của app)
@@ -385,6 +492,8 @@ DEMO_BUILDING.floors[0].furniture = [
   { id: "bc2", type: "armchair", x: 2.0, z: -0.85, rotation: 0, w: 0.85, d: 0.85, h: 0.8, variant: null },
   { id: "bc3", type: "plant", x: 3.8, z: -0.8, rotation: 0, w: 0.45, d: 0.45, h: 1.1, variant: null },
   { id: "bc4", type: "table_round", x: 1.0, z: -0.85, rotation: 0, w: 0.7, d: 0.7, h: 0.75, variant: null },
+  // B2: máy sấy (loggia)
+  { id: "lg5", type: "dryer", x: 12.2, z: 4.9, rotation: 0, w: 0.6, d: 0.6, h: 0.9, variant: null, entity: "switch.may_say" },
 ];
 
 // Pack đồ nội thất demo (tương thích định dạng fp3dpack) – giữ cho demo shop

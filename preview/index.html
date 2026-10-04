@@ -117,7 +117,13 @@
               next.state = "idle";
               a.status = "Idle";
             }
-            else if (service === "turn_off") setOn(false);
+            else if (service === "lock" && domain === "lock") {
+              next.state = "locked";
+            } else if (service === "unlock" && domain === "lock") {
+              next.state = "unlocked";
+            } else if (service === "toggle" && domain === "homeassistant") {
+              setOn(st.state !== "on");
+            } else if (service === "turn_off") setOn(false);
             else if (service === "turn_on" && domain === "light") {
               setOn(true);
               if (data.brightness_pct !== undefined) a.brightness = Math.round((data.brightness_pct / 100) * 255);
